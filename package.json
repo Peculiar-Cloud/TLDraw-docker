@@ -1,0 +1,63 @@
+{
+  "name": "@peculiar-cloud/tldraw-docker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Rootless-friendly, non-root Docker image for a self-hosted tldraw collaboration server.",
+  "type": "module",
+  "license": "MIT",
+  "packageManager": "pnpm@11.6.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "pnpm run build:server && pnpm run build:client",
+    "build:client": "vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test",
+    "dev": "concurrently -n server,client -c green,cyan \"pnpm dev:server\" \"pnpm dev:client\"",
+    "dev:client": "vite --host 0.0.0.0",
+    "dev:server": "tsx watch src/server/index.ts",
+    "format": "biome format --write .",
+    "format:check": "biome ci . --linter-enabled=false",
+    "lint": "eslint . && biome ci . --formatter-enabled=false",
+    "prepare": "husky",
+    "start": "node dist/server/index.js",
+    "test": "vitest run --root .",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.server.json"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "@fastify/static": "^9.1.3",
+    "@fastify/websocket": "^11.2.0",
+    "@tldraw/assets": "5.1.0",
+    "@tldraw/sync": "5.1.0",
+    "@tldraw/sync-core": "5.1.0",
+    "fastify": "^5.8.5",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tldraw": "5.1.0",
+    "unfurl.js": "^6.4.0",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.9.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^6.0.2",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.4.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.7",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.0",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
+  }
+}
