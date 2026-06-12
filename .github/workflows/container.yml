@@ -31,6 +31,8 @@ jobs:
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v4.1.0
+        with:
+          cache-image: false
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v4.1.0
@@ -53,6 +55,14 @@ jobs:
         uses: docker/metadata-action@v6.1.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          labels: |
+            org.opencontainers.image.title=TLDraw Docker
+            org.opencontainers.image.description=Rootless-friendly, non-root Docker image for a self-hosted tldraw collaboration server.
+            org.opencontainers.image.vendor=Peculiar Cloud
+          annotations: |
+            org.opencontainers.image.title=TLDraw Docker
+            org.opencontainers.image.description=Rootless-friendly, non-root Docker image for a self-hosted tldraw collaboration server.
+            org.opencontainers.image.vendor=Peculiar Cloud
           tags: |
             type=raw,value=main,enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=sdk-${{ steps.sdk.outputs.version }},enable=${{ github.ref == 'refs/heads/main' }}
@@ -61,6 +71,8 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha,prefix=sha-
+        env:
+          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
       - name: Build and push
         id: build
@@ -71,6 +83,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
           cache-from: type=gha
           cache-to: type=gha,mode=max,ignore-error=true
           sbom: false
