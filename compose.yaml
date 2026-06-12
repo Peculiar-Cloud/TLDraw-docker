@@ -1,0 +1,25 @@
+services:
+  tldraw:
+    image: ghcr.io/peculiar-cloud/tldraw-docker:latest
+    init: true
+    restart: unless-stopped
+    ports:
+      - "5858:5858"
+    environment:
+      PORT: "5858"
+      DATA_DIR: /data
+      TRUSTED_ORIGINS: "http://localhost:5858"
+      ENABLE_UNFURL: "false"
+      # TLDRAW_LICENSE_KEY: "tldraw-..."
+    volumes:
+      - tldraw-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  tldraw-data:

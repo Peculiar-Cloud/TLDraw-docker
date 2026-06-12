@@ -1,0 +1,4 @@
+{
+  "*.{js,jsx,ts,tsx,json,jsonc,css,md,yml,yaml}": "biome check --write --no-errors-on-unmatched",
+  "*.{js,jsx,ts,tsx}": "eslint --max-warnings=0"
+}

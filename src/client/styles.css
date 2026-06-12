@@ -1,0 +1,138 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f7f7f3;
+  color: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+button {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+button:hover {
+  background: #f3f4f6;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  width: 100%;
+  height: 100%;
+}
+
+.topbar {
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(160px, max-content) minmax(0, 1fr) max-content;
+  padding: 8px 12px;
+  z-index: 5;
+}
+
+.brand {
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 8px;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  align-items: center;
+  background: #111827;
+  border-radius: 6px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 800;
+  height: 26px;
+  justify-content: center;
+  width: 26px;
+}
+
+.room-pill {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  color: #374151;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 7px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.canvas {
+  min-height: 0;
+  position: relative;
+}
+
+.status-screen {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.status-screen h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.status-screen p {
+  color: #4b5563;
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    grid-template-rows: auto 1fr;
+  }
+
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommits"],
+  "timezone": "America/Toronto",
+  "dependencyDashboard": true,
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump",
+  "schedule": ["before 6am on monday"],
+  "packageRules": [
+    {
+      "description": "Keep the tldraw SDK packages on the same version.",
+      "matchPackageNames": ["tldraw", "@tldraw/assets", "@tldraw/sync", "@tldraw/sync-core"],
+      "groupName": "tldraw sdk",
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    },
+    {
+      "description": "Major tldraw SDK updates need human review.",
+      "matchPackageNames": ["tldraw", "@tldraw/assets", "@tldraw/sync", "@tldraw/sync-core"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "groupName": "container images"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "dev dependencies",
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "automerge": true
+  }
+}
