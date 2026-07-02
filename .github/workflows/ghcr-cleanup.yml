@@ -1,0 +1,52 @@
+name: GHCR cleanup
+
+on:
+  schedule:
+    - cron: "47 5 * * 0"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only print versions that would be deleted"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      min_age_days:
+        description: "Minimum age for cleanup candidates"
+        required: false
+        default: "7"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  PACKAGE_OWNER: Peculiar-Cloud
+  PACKAGE_NAME: tldraw-docker
+  REGISTRY_IMAGE: ghcr.io/peculiar-cloud/tldraw-docker
+  DELETE_SHA_ONLY: "true"
+
+jobs:
+  cleanup:
+    name: Delete stale GHCR versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.3
+
+      - uses: docker/setup-buildx-action@v4.1.0
+
+      - name: Login to GHCR
+        uses: docker/login-action@v4.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete unreferenced package versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true' }}
+          MIN_AGE_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.min_age_days || '7' }}
+        run: node .github/scripts/cleanup-ghcr-versions.mjs
