@@ -75,8 +75,11 @@ Useful tags:
 - `latest`: latest GitHub release.
 - `main`: latest successful build from `main`.
 - `sdk-X.Y.Z`: latest `main` build for a specific tldraw SDK version.
-- `vX.Y.Z`: release tag.
-- `sha-<commit>`: immutable commit build.
+- `X.Y.Z`, `X.Y`, and `X`: semantic-version aliases.
+
+The package also has a weekly cleanup workflow that deletes old unreferenced
+untagged versions and retired `sha-*` versions while preserving platform
+manifests referenced by active tags.
 
 ## Configuration
 

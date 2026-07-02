@@ -81,7 +81,7 @@ jobs:
         run: |
           docker run --rm -d --name tldraw-docker-smoke -p 5858:5858 tldraw-docker:ci
           trap 'docker rm -f tldraw-docker-smoke >/dev/null 2>&1 || true' EXIT
-          for attempt in $(seq 1 30); do
+          for _ in $(seq 1 30); do
             if curl -fsS http://127.0.0.1:5858/healthz; then
               exit 0
             fi
