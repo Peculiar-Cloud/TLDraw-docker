@@ -3,7 +3,9 @@
 ARG NODE_VERSION=26.3.0
 ARG PNPM_VERSION=11.6.0
 
-FROM node:${NODE_VERSION}-alpine AS build-base
+# The application and its production dependencies are architecture-independent
+# JavaScript. Run install/build steps natively instead of emulating Node with QEMU.
+FROM --platform=$BUILDPLATFORM node:${NODE_VERSION}-alpine AS build-base
 WORKDIR /app
 ENV PNPM_HOME=/pnpm
 ENV PATH="${PNPM_HOME}:${PATH}"
