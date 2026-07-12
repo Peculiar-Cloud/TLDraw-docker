@@ -1,7 +1,7 @@
-# syntax=docker/dockerfile:1.7
+# syntax=docker/dockerfile:1.25
 
-ARG NODE_VERSION=26.3.0
-ARG PNPM_VERSION=11.6.0
+ARG NODE_VERSION=26.5.0
+ARG PNPM_VERSION=11.12.0
 
 # The application and its production dependencies are architecture-independent
 # JavaScript. Run install/build steps natively instead of emulating Node with QEMU.

@@ -3,6 +3,7 @@
   "extends": ["config:recommended", ":semanticCommits"],
   "timezone": "America/Toronto",
   "dependencyDashboard": true,
+  "prConcurrentLimit": 0,
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
   "schedule": ["at any time"],
