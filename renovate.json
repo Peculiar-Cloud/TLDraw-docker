@@ -28,6 +28,11 @@
       "groupName": "dev dependencies",
       "matchUpdateTypes": ["patch", "minor"],
       "automerge": true
+    },
+    {
+      "description": "Keep TypeScript within the range supported by typescript-eslint.",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<6.1.0"
     }
   ],
   "vulnerabilityAlerts": {
