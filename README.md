@@ -19,7 +19,7 @@ This project is not affiliated with tldraw. It packages a small Vite, React, and
 - pnpm 11 with lockfile supply-chain verification and explicit native build approvals.
 - React 19 and Vite 8.
 - TypeScript 6 in strict mode.
-- tldraw SDK 5.2.
+- Current stable tldraw SDK.
 - Chainguard non-root Node runtime with multi-stage builds.
 - GHCR multi-architecture images for `linux/amd64` and `linux/arm64`.
 - GHCR publishing with platform-only image indexes and GitHub provenance attestations.
