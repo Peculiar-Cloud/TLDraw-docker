@@ -5,20 +5,14 @@
   "dependencyDashboard": true,
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
-  "schedule": ["before 6am on monday"],
+  "schedule": ["at any time"],
   "packageRules": [
     {
       "description": "Keep the tldraw SDK packages on the same version.",
       "matchPackageNames": ["tldraw", "@tldraw/assets", "@tldraw/sync", "@tldraw/sync-core"],
       "groupName": "tldraw sdk",
-      "matchUpdateTypes": ["patch", "minor"],
+      "matchUpdateTypes": ["patch", "minor", "major"],
       "automerge": true
-    },
-    {
-      "description": "Major tldraw SDK updates need human review.",
-      "matchPackageNames": ["tldraw", "@tldraw/assets", "@tldraw/sync", "@tldraw/sync-core"],
-      "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true
     },
     {
       "matchManagers": ["github-actions"],

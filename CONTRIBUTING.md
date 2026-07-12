@@ -26,4 +26,4 @@ docker build -t tldraw-docker:local .
 
 Renovate keeps pnpm dependencies, GitHub Actions, Docker base images, and Compose references up to date. The tldraw SDK packages are grouped so `tldraw`, `@tldraw/sync`, `@tldraw/sync-core`, and `@tldraw/assets` move together.
 
-Patch and minor updates may be automerged after CI passes. Major tldraw SDK updates require manual review.
+Stable tldraw SDK updates may be automerged after CI passes, including major releases, so matching container tags can be published without a manual release step.

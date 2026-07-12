@@ -13,9 +13,11 @@ The container workflow publishes to GHCR when:
 
 | Tag | Meaning |
 | --- | --- |
-| `main` | Latest successful build from `main`. |
-| `sdk-X.Y.Z` | Latest `main` build for a specific tldraw SDK version. |
-| `latest` | Latest versioned release. |
+| `latest` | Latest successful build with the newest tldraw SDK on `main`. |
+| `main` | Alias of `latest`. |
+| `sdk-X.Y.Z` | Build pinned to an exact tldraw SDK version. |
+| `sdk-X.Y` | Latest patch release in a tldraw SDK minor line. |
+| `sdk-X` | Latest minor release in a tldraw SDK major line. |
 | `vX.Y.Z` | Exact release version. |
 | `X.Y` | Latest patch in a minor release line. |
 | `X` | Latest minor in a major release line. |
@@ -30,7 +32,7 @@ Renovate groups the tldraw SDK packages so they update together:
 - `@tldraw/sync`
 - `@tldraw/sync-core`
 
-Patch and minor SDK updates can automerge after CI passes. Major SDK updates require manual approval and release note review.
+All stable SDK updates can automerge after CI passes. Renovate is allowed to create update PRs at any time so a successful SDK update publishes on the day it is detected.
 
 ## Release Checklist
 
