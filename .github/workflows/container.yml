@@ -48,7 +48,9 @@ jobs:
         id: sdk
         run: |
           version="$(node -p "require('./package.json').dependencies.tldraw")"
-          echo "version=${version#^}" >> "$GITHUB_OUTPUT"
+          version="${version#^}"
+          node -e "const [major, minor] = process.argv[1].split('.'); console.log('major=' + major + '\nminor=' + major + '.' + minor)" "$version" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Extract image metadata
         id: meta
@@ -65,8 +67,10 @@ jobs:
             org.opencontainers.image.vendor=Peculiar Cloud
           tags: |
             type=raw,value=main,enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=sdk-${{ steps.sdk.outputs.version }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=raw,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+            type=raw,value=sdk-${{ steps.sdk.outputs.minor }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=sdk-${{ steps.sdk.outputs.major }},enable=${{ github.ref == 'refs/heads/main' }}
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}

@@ -19,7 +19,7 @@ This project is not affiliated with tldraw. It packages a small Vite, React, and
 - pnpm 11 with lockfile supply-chain verification and explicit native build approvals.
 - React 19 and Vite 8.
 - TypeScript 6 in strict mode.
-- tldraw SDK 5.1.
+- tldraw SDK 5.2.
 - Chainguard non-root Node runtime with multi-stage builds.
 - GHCR multi-architecture images for `linux/amd64` and `linux/arm64`.
 - GHCR publishing with platform-only image indexes and GitHub provenance attestations.
@@ -72,9 +72,11 @@ docker pull ghcr.io/peculiar-cloud/tldraw-docker:latest
 
 Useful tags:
 
-- `latest`: latest GitHub release.
-- `main`: latest successful build from `main`.
-- `sdk-X.Y.Z`: latest `main` build for a specific tldraw SDK version.
+- `latest`: latest successful build with the newest tldraw SDK on `main`.
+- `main`: alias of `latest`.
+- `sdk-X.Y.Z`: build pinned to an exact tldraw SDK version.
+- `sdk-X.Y`: latest patch release in a tldraw SDK minor line.
+- `sdk-X`: latest minor release in a tldraw SDK major line.
 - `X.Y.Z`, `X.Y`, and `X`: semantic-version aliases.
 
 The package also has a weekly cleanup workflow that deletes old unreferenced
@@ -134,7 +136,7 @@ Renovate opens grouped PRs for the tldraw SDK packages:
 - `@tldraw/sync`
 - `@tldraw/sync-core`
 
-Patch and minor updates can be automerged after CI passes. Major SDK updates require review. The container workflow also runs weekly to rebuild the image and pick up base image security fixes.
+Stable SDK updates can be automerged after CI passes, including major releases. Renovate can create these PRs at any time; merging one publishes `latest` plus exact and rolling `sdk-*` tags. The container workflow also runs weekly to rebuild active tags and pick up base image security fixes.
 
 ## Support
 
