@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.25
+# syntax=docker/dockerfile:1.26
 
 ARG NODE_VERSION=26.5.0
 ARG PNPM_VERSION=11.12.0
