@@ -1,43 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", ":semanticCommits"],
-  "timezone": "America/Toronto",
-  "dependencyDashboard": true,
-  "prConcurrentLimit": 0,
-  "labels": ["dependencies"],
-  "rangeStrategy": "bump",
-  "schedule": ["at any time"],
+  "extends": ["github>Peculiar-Cloud/renovate"],
   "packageRules": [
     {
-      "description": "Keep the tldraw SDK packages on the same version.",
+      "description": "Keep the tldraw SDK packages on one version. They are released in lockstep and mixing versions breaks the sync protocol, so they are split out of the shared minor/patch group and bumped together.",
       "matchPackageNames": ["tldraw", "@tldraw/assets", "@tldraw/sync", "@tldraw/sync-core"],
-      "groupName": "tldraw sdk",
       "matchUpdateTypes": ["patch", "minor", "major"],
-      "automerge": true
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "groupName": "github actions"
-    },
-    {
-      "matchManagers": ["dockerfile", "docker-compose"],
-      "groupName": "container images"
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "groupName": "dev dependencies",
-      "matchUpdateTypes": ["patch", "minor"],
-      "automerge": true
+      "groupName": "tldraw sdk",
+      "groupSlug": "tldraw-sdk",
+      "automerge": true,
+      "labels": ["dependencies", "tldraw", "automerge"]
     },
     {
       "description": "Keep TypeScript within the range supported by typescript-eslint.",
       "matchPackageNames": ["typescript"],
       "allowedVersions": "<6.1.0"
     }
-  ],
-  "vulnerabilityAlerts": {
-    "enabled": true,
-    "labels": ["security"],
-    "automerge": true
-  }
+  ]
 }
